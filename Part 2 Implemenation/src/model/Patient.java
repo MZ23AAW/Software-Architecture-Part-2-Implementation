@@ -12,7 +12,6 @@ public class Patient {
     private String email;
     private String postcode;
 
-    // Constructor
     public Patient(String patientId, String firstName, String lastName,
                    String dob, String nhsNumber, String gender,
                    String phone, String email, String postcode) {
@@ -28,7 +27,6 @@ public class Patient {
         this.postcode = postcode;
     }
 
-    // Getters
     public String getPatientId() {
         return patientId;
     }
