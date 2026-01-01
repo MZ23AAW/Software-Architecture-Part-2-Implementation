@@ -1,31 +1,47 @@
 import controller.PatientController;
 import model.Patient;
 
+import controller.PatientController;
+import controller.AppointmentController;
+import model.Appointment;
+import model.Patient; 
+
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
         PatientController pc = new PatientController();
         pc.loadPatients("data/patients.csv");
 
-        // Test 1: Count patients
-        System.out.println("Patients loaded: " + pc.getPatients().size());
+        AppointmentController ac = new AppointmentController();
+        ac.loadAppointments("data/appointments.csv");
 
-        // Test 2: Print all patients
-        for (Patient p : pc.getPatients()) {
+        String testPatientId = "P001";
+        Patient patient = pc.findPatientById(testPatientId);
+
+        if (patient == null) {
+            System.out.println("Patient not found");
+            return;
+        }
+
+        System.out.println("Appointments for "
+                + patient.getFirstName() + " "
+                + patient.getLastName() + ":");
+
+        List<Appointment> patientAppointments =
+                ac.getAppointmentsForPatient(testPatientId);
+
+        for (Appointment a : patientAppointments) {
             System.out.println(
-                    p.getPatientId() + " - " +
-                            p.getFirstName() + " " +
-                            p.getLastName()
+                    a.getAppointmentId() + " | " +
+                            a.getStatus()
             );
         }
 
-        // Test 3: Find a patient by ID
-        Patient found = pc.findPatientById("P001");
-        if (found != null) {
-            System.out.println("Found patient: " + found.getFirstName());
-        } else {
-            System.out.println("Patient not found");
-        }
+        System.out.println("Total appointments: "
+                + patientAppointments.size());
     }
 }
+
 
