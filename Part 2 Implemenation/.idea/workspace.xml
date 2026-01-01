@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451ce19a-230a-49cb-8ef5-b662fdce1408" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/controller/FacilityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/StaffController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/PatientView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ReferralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ReferralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Facility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Facility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Referral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Referral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ReferralManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ReferralManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Staff.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
