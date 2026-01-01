@@ -36,5 +36,6 @@ public class Staff {
 
     public String getStaffId() { return staffId; }
     public String getRole() { return role; }
+    public String getFacilityId() { return facilityId; }
     public String getAccessLevel() { return accessLevel; }
 }

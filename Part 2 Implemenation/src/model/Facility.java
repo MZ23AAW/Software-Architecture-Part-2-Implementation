@@ -32,7 +32,19 @@ public class Facility {
         this.specialitiesOffered = specialitiesOffered;
     }
 
-    public String getFacilityId() { return facilityId; }
-    public String getFacilityName() { return facilityName; }
-    public String getFacilityType() { return facilityType; }
+    public String getFacilityId() {
+        return facilityId;
+    }
+
+    public String getFacilityName() {
+        return facilityName;
+    }
+
+    public String getFacilityType() {
+        return facilityType;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
 }

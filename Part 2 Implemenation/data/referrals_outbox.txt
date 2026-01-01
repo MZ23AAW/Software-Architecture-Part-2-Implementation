@@ -1,0 +1,8 @@
+Referral ID: R001
+Patient ID: P001
+Referring Clinician: C001
+Referred To Clinician: C010
+Reason: Neurology referral
+Clinical Summary: Patient reports persistent headaches
+Status: Pending
+----------------------------------

@@ -1,47 +1,24 @@
-import controller.PatientController;
-import model.Patient;
-
-import controller.PatientController;
-import controller.AppointmentController;
-import model.Appointment;
-import model.Patient; 
-
-import java.util.List;
+import controller.ReferralManager;
+import model.Referral;
 
 public class Main {
+
     public static void main(String[] args) {
 
-        PatientController pc = new PatientController();
-        pc.loadPatients("data/patients.csv");
+        ReferralManager rm = ReferralManager.getInstance();
 
-        AppointmentController ac = new AppointmentController();
-        ac.loadAppointments("data/appointments.csv");
+        Referral r = new Referral(
+                "R001",
+                "P001",
+                "C001",
+                "C010",
+                "Neurology referral",
+                "Patient reports persistent headaches",
+                "Pending"
+        );
 
-        String testPatientId = "P001";
-        Patient patient = pc.findPatientById(testPatientId);
+        rm.addReferral(r);
 
-        if (patient == null) {
-            System.out.println("Patient not found");
-            return;
-        }
-
-        System.out.println("Appointments for "
-                + patient.getFirstName() + " "
-                + patient.getLastName() + ":");
-
-        List<Appointment> patientAppointments =
-                ac.getAppointmentsForPatient(testPatientId);
-
-        for (Appointment a : patientAppointments) {
-            System.out.println(
-                    a.getAppointmentId() + " | " +
-                            a.getStatus()
-            );
-        }
-
-        System.out.println("Total appointments: "
-                + patientAppointments.size());
+        System.out.println("Referral created and recorded.");
     }
 }
-
-

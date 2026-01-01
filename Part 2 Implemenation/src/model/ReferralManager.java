@@ -1,17 +1,18 @@
-package model;
+package controller;
 
+import model.Referral;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReferralManager {
-    private static ReferralManager instance;
-    private List<Referral> referralQueue;
 
-    private ReferralManager() {
-        referralQueue = new ArrayList<>();
-    }
+    private static ReferralManager instance;
+    private List<Referral> referralQueue = new ArrayList<>();
+
+    private ReferralManager() {}
+
     public static ReferralManager getInstance() {
         if (instance == null) {
             instance = new ReferralManager();
@@ -19,24 +20,16 @@ public class ReferralManager {
         return instance;
     }
 
-    public void processReferral(Referral referral) {
+    public void addReferral(Referral referral) {
         referralQueue.add(referral);
-        saveReferral(referral);
-        generateReferralEmail(referral);
+        writeReferralToFile(referral);
     }
-    private void saveReferral(Referral referral) {
-        try(FileWriter fw = new FileWriter("data/referral.csv", true )) {
-            fw.write(referral.toText() + "\n\n");
+
+    private void writeReferralToFile(Referral referral) {
+        try (FileWriter writer = new FileWriter("data/referrals_outbox.txt", true)) {
+            writer.write(referral.toText());
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-    private void generateReferralEmail(Referral referral) {
-        try (FileWriter fw =
-                new FileWriter("data/referral_email_" + referral.hashCode() + ".txt")){
-            fw.write(referral.toText());
-        } catch (IOException e) {
-        e.printStackTrace();
         }
     }
 }
