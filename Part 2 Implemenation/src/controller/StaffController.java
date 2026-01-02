@@ -2,12 +2,10 @@ package controller;
 
 import model.Staff;
 import util.CSVReader;
-
-import java.util.ArrayList;
-import java.sql.Date;
-import java.util.List;
 import util.DateParser;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class StaffController {
 
@@ -17,23 +15,22 @@ public class StaffController {
         List<String[]> rows = CSVReader.read(filePath);
 
         for (String[] row : rows) {
-
             if (row.length < 12) {
                 System.out.println("Skipping invalid staff row");
                 continue;
             }
 
             Staff staff = new Staff(
-                    Integer.parseInt(row[0].trim()),
+                    row[0],                 // staff_id e.g. S001
                     row[1],
                     row[2],
                     row[3],
                     row[4],
-                    Integer.parseInt(row[5].trim()),
+                    row[5],                 // facility_id e.g. F001
                     row[6],
                     row[7],
                     row[8],
-                    DateParser.parse(row[9]),
+                    DateParser.parse(row[9]), // start_date
                     row[10],
                     row[11]
             );
@@ -46,21 +43,20 @@ public class StaffController {
         return staffList;
     }
 
-    public List<Staff> getStaffByFacility(int facilityId) {
+    public List<Staff> getStaffByFacility(String facilityId) {
         List<Staff> result = new ArrayList<>();
-
         for (Staff s : staffList) {
-            if (s.getFacilityId() == facilityId) {
+            if (s.getFacilityId().equals(facilityId)) {
                 result.add(s);
             }
         }
         return result;
     }
 
-    public boolean hasAccess(int staffId, String requiredLevel) {
+    public boolean hasAccess(String staffId, String requiredLevel) {
         for (Staff s : staffList) {
-            if (s.getStaffId() == staffId) {
-                return s.getaccessLevel().equalsIgnoreCase(requiredLevel);
+            if (s.getStaffId().equals(staffId)) {
+                return s.getAccessLevel().equalsIgnoreCase(requiredLevel);
             }
         }
         return false;

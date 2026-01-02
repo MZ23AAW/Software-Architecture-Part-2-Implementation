@@ -1,14 +1,15 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 import java.sql.Time;
 
 public class Appointment {
 
-    private int appointmentId;
-    private int patientId;
-    private int clinicianId;
-    private int facilityId;
+    private String appointmentId;
+    private String patientId;
+    private String clinicianId;
+    private String facilityId;
+
     private Date appointmentDate;
     private Time appointmentTime;
     private int durationMinutes;
@@ -19,10 +20,10 @@ public class Appointment {
     private Date createdDate;
     private Date lastModified;
 
-    public Appointment(int appointmentId,
-                       int patientId,
-                       int clinicianId,
-                       int facilityId,
+    public Appointment(String appointmentId,
+                       String patientId,
+                       String clinicianId,
+                       String facilityId,
                        Date appointmentDate,
                        Time appointmentTime,
                        int durationMinutes,
@@ -48,42 +49,7 @@ public class Appointment {
         this.lastModified = lastModified;
     }
 
-
-    public int getAppointmentId() {
-        return appointmentId;
-    }
-
-    public int getPatientId() {
+    public String getPatientId() {
         return patientId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-
-    public void createAppointment() {
-        System.out.println("Appointment created.");
-    }
-
-    public void modifyAppointment() {
-        System.out.println("Appointment modified.");
-        this.lastModified = new Date();
-    }
-
-    public void cancelAppointment() {
-        this.status = "Cancelled";
-        this.lastModified = new Date();
-        System.out.println("Appointment cancelled.");
-    }
-
-    public void viewAppointmentDetails() {
-        System.out.println("Viewing appointment details...");
-    }
-
-    public void updateStatus(String newStatus) {
-        this.status = newStatus;
-        this.lastModified = new Date();
-        System.out.println("Appointment status updated.");
     }
 }

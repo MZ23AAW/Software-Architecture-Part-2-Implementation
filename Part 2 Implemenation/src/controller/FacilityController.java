@@ -14,33 +14,32 @@ public class FacilityController {
         List<String[]> rows = CSVReader.read(filePath);
 
         for (String[] row : rows) {
-
             if (row.length < 11) {
                 System.out.println("Skipping invalid facility row");
                 continue;
             }
 
             Facility facility = new Facility(
-                    Integer.parseInt(row[0].trim()),   // facility_id (int)
-                    row[1],                            // facility_name
-                    row[2],                            // facility_type
-                    row[3],                            // address
-                    row[4],                            // postcode
-                    row[5],                            // phone_number
-                    row[6],                            // email
-                    row[7],                            // opening_hours
-                    row[8],                            // manager_name
-                    Integer.parseInt(row[9].trim()),   // capacity (int)
-                    row[10]                            // specialities_offered
+                    row[0],
+                    row[1],
+                    row[2],
+                    row[3],
+                    row[4],
+                    row[5],
+                    row[6],
+                    row[7],
+                    row[8],
+                    Integer.parseInt(row[9].trim()),
+                    row[10]
             );
 
             facilities.add(facility);
         }
     }
 
-    public Facility findFacilityById(int id) {
+    public Facility findFacilityById(String id) {
         for (Facility f : facilities) {
-            if (f.getFacilityId() == id) {
+            if (f.getFacilityId().equals(id)) {
                 return f;
             }
         }

@@ -4,12 +4,12 @@ import java.util.Date;
 
 public class Staff {
 
-    private int staffId;
+    private String staffId;
     private String firstName;
     private String lastName;
     private String role;
     private String department;
-    private int facilityId;
+    private String facilityId;
     private String phoneNumber;
     private String email;
     private String employmentStatus;
@@ -17,8 +17,8 @@ public class Staff {
     private String lineManager;
     private String accessLevel;
 
-    public Staff(int staffId, String firstName, String lastName,
-                 String role, String department, int facilityId,
+    public Staff(String staffId, String firstName, String lastName,
+                 String role, String department, String facilityId,
                  String phoneNumber, String email,
                  String employmentStatus, Date startDate,
                  String lineManager, String accessLevel) {
@@ -37,45 +37,26 @@ public class Staff {
         this.accessLevel = accessLevel;
     }
 
-
-    public int getStaffId() {
+    public String getStaffId() {
         return staffId;
     }
 
-    public int getFacilityId() {
+    public String getFacilityId() {
         return facilityId;
     }
 
-    public String getrole() {
+    public String getRole() {
         return role;
     }
 
-    public String getaccessLevel() {
+    public String getAccessLevel() {
         return accessLevel;
     }
 
-
-    public void createStaffAccount() {
-        System.out.println("Staff account created.");
-    }
-
-    public void updateStaffDetails() {
-        System.out.println("Staff details updated.");
-    }
-
-    public void assignToFacility() {
-        System.out.println("Staff assigned to facility.");
-    }
-
-    public void viewAssignedFacility() {
-        System.out.println("Viewing assigned facility.");
-    }
-
-    public void manageAppointments() {
-        System.out.println("Managing appointments...");
-    }
-
-    public void registerPatient() {
-        System.out.println("Registering patient...");
-    }
+    public void createStaffAccount() { System.out.println("Staff account created."); }
+    public void updateStaffDetails() { System.out.println("Staff details updated."); }
+    public void assignToFacility() { System.out.println("Staff assigned to facility."); }
+    public void viewAssignedFacility() { System.out.println("Viewing assigned facility."); }
+    public void manageAppointments() { System.out.println("Managing appointments..."); }
+    public void registerPatient() { System.out.println("Registering patient..."); }
 }
