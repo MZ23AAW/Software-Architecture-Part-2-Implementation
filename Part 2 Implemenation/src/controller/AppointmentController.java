@@ -7,6 +7,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
+import util.DateParser;
+
 
 public class AppointmentController {
 
@@ -17,7 +19,6 @@ public class AppointmentController {
 
         for (String[] row : rows) {
 
-            // Defensive check
             if (row.length < 13) {
                 System.out.println("Skipping invalid appointment row");
                 continue;
@@ -28,15 +29,15 @@ public class AppointmentController {
                     Integer.parseInt(row[1]),              // patient_id
                     Integer.parseInt(row[2]),              // clinician_id
                     Integer.parseInt(row[3]),              // facility_id
-                    Date.valueOf(row[4]),                  // appointment_date (yyyy-mm-dd)
+                    DateParser.parse(row[4]),
                     Time.valueOf(row[5]),                  // appointment_time (HH:mm:ss)
                     Integer.parseInt(row[6]),              // duration_minutes
                     row[7],                                // appointment_type
                     row[8],                                // status
                     row[9],                                // reason_for_visit
                     row[10],                               // notes
-                    Date.valueOf(row[11]),                 // created_date
-                    Date.valueOf(row[12])                  // last_modified
+                    DateParser.parse(row[11]),                 // created_date
+                    DateParser.parse(row[12])                  // last_modified
             );
 
             appointments.add(appointment);

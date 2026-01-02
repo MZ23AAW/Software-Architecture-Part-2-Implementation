@@ -3,9 +3,11 @@ package controller;
 import model.Patient;
 import util.CSVReader;
 
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import util.DateParser;
+
 
 public class PatientController {
 
@@ -22,20 +24,20 @@ public class PatientController {
             }
 
             Patient patient = new Patient(
-                    Integer.parseInt(row[0].trim()),  // patient_id (int)
-                    row[1],                           // first_name
-                    row[2],                           // last_name
-                    Date.valueOf(row[3]),             // date_of_birth (yyyy-mm-dd)
-                    row[4],                           // nhs_number
-                    row[5],                           // gender
-                    row[6],                           // phone_number
-                    row[7],                           // email
-                    row[8],                           // address
-                    row[9],                           // postcode
-                    row[10],                          // emergency_contact_name
-                    row[11],                          // emergency_contact_phone
-                    Date.valueOf(row[12]),            // registration_date
-                    Integer.parseInt(row[13].trim())  // gp_surgery_id
+                    row[0],                 // patient_id e.g. P001
+                    row[1],                 // first_name
+                    row[2],                 // last_name
+                    DateParser.parse(row[3]),
+                    row[4],                 // nhs_number
+                    row[5],                 // gender
+                    row[6],                 // phone
+                    row[7],                 // email
+                    row[8],                 // address
+                    row[9],                 // postcode
+                    row[10],                // emergency_contact_name
+                    row[11],                // emergency_contact_phone
+                    DateParser.parse(row[12]),
+                    row[13]                 // gp_surgery_id
             );
 
             patients.add(patient);
@@ -46,9 +48,9 @@ public class PatientController {
         return patients;
     }
 
-    public Patient findPatientById(int patientId) {
+    public Patient findPatientById(String patientId) {
         for (Patient p : patients) {
-            if (p.getPatientId() == patientId) {
+            if (p.getPatientId().equals(patientId)) {
                 return p;
             }
         }

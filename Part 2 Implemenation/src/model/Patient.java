@@ -1,10 +1,10 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Patient {
 
-    private int patientId;
+    private String patientId;
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
@@ -17,14 +17,14 @@ public class Patient {
     private String emergencyContactName;
     private String emergencyContactPhone;
     private Date registrationDate;
-    private int gpSurgeryId;
+    private String gpSurgeryId;
 
-    public Patient(int patientId, String firstName, String lastName,
+    public Patient(String patientId, String firstName, String lastName,
                    Date dateOfBirth, String nhsNumber, String gender,
                    String phoneNumber, String email, String address,
                    String postcode, String emergencyContactName,
                    String emergencyContactPhone, Date registrationDate,
-                   int gpSurgeryId) {
+                   String gpSurgeryId) {
 
         this.patientId = patientId;
         this.firstName = firstName;
@@ -42,38 +42,13 @@ public class Patient {
         this.gpSurgeryId = gpSurgeryId;
     }
 
-
-    public int getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-
-
-    public void registerPatient() {
-        System.out.println("Patient registered.");
-    }
-
-    public void updateProfile() {
-        System.out.println("Patient profile updated.");
-    }
-
-    public void viewAppointments() {
-        System.out.println("Viewing appointments...");
-    }
-
-    public void viewPrescriptions() {
-        System.out.println("Viewing prescriptions...");
-    }
-
-    public void viewReferrals() {
-        System.out.println("Viewing referrals...");
-    }
+    public void registerPatient() {}
+    public void updateProfile() {}
+    public void viewAppointments() {}
+    public void viewPrescriptions() {}
+    public void viewReferrals() {}
 }

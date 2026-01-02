@@ -6,6 +6,8 @@ import util.CSVReader;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
+import util.DateParser;
+
 
 public class StaffController {
 
@@ -31,7 +33,7 @@ public class StaffController {
                     row[6],
                     row[7],
                     row[8],
-                    Date.valueOf(row[9]),
+                    DateParser.parse(row[9]),
                     row[10],
                     row[11]
             );
