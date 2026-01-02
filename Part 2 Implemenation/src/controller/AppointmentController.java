@@ -54,6 +54,14 @@ public class AppointmentController {
         }
         return result;
     }
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
+
+    public void deleteAppointment(String appointmentId) {
+        appointments.removeIf(a -> a.getAppointmentId().equals(appointmentId));
+    }
+
 
     private String normaliseTime(String raw) {
         raw = raw.trim();
@@ -61,3 +69,24 @@ public class AppointmentController {
         return raw;
     }
 }
+
+public String getAppointmentId() {
+    return appointmentId;
+}
+
+public Date getAppointmentDate() {
+    return appointmentDate;
+}
+
+public Time getAppointmentTime() {
+    return appointmentTime;
+}
+
+public String getAppointmentType() {
+    return appointmentType;
+}
+
+public String getStatus() {
+    return status;
+}
+

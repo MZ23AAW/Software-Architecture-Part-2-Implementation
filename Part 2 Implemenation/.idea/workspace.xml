@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451ce19a-230a-49cb-8ef5-b662fdce1408" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/controller/ClinicianController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/prescriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/prescriptions.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/PatientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/patients.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/patients.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PatientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/PrescriptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/PrescriptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ReferralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ReferralController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Clinician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Clinician.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Patient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Prescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Prescription.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Referral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Referral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ReferralManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ReferralManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/CSVWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/CSVWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

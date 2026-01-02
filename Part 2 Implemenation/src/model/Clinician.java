@@ -1,10 +1,10 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Clinician {
 
-    private int clinicianId;
+    private String clinicianId;
     private String firstName;
     private String lastName;
     private String title;
@@ -12,16 +12,23 @@ public class Clinician {
     private String gmcNumber;
     private String phoneNumber;
     private String email;
-    private int workplaceId;
+    private String workplaceId;
     private String workplaceType;
     private String employmentStatus;
     private Date startDate;
 
-    public Clinician(int clinicianId, String firstName, String lastName,
-                     String title, String speciality, String gmcNumber,
-                     String phoneNumber, String email,
-                     int workplaceId, String workplaceType,
-                     String employmentStatus, Date startDate) {
+    public Clinician(String clinicianId,
+                     String firstName,
+                     String lastName,
+                     String title,
+                     String speciality,
+                     String gmcNumber,
+                     String phoneNumber,
+                     String email,
+                     String workplaceId,
+                     String workplaceType,
+                     String employmentStatus,
+                     Date startDate) {
 
         this.clinicianId = clinicianId;
         this.firstName = firstName;
@@ -37,29 +44,68 @@ public class Clinician {
         this.startDate = startDate;
     }
 
-    public int getClinicianId() {
+
+    public String getClinicianId() {
         return clinicianId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public String getSpeciality() {
         return speciality;
     }
 
+    public String getGmcNumber() {
+        return gmcNumber;
+    }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getWorkplaceId() {
+        return workplaceId;
+    }
+
+    public String getWorkplaceType() {
+        return workplaceType;
+    }
+
+    public String getEmploymentStatus() {
+        return employmentStatus;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
 
     public void viewPatientRecord() {
         System.out.println("Viewing patient record...");
     }
 
     public void createReferral() {
-        System.out.println("Referral created.");
+        System.out.println("Creating referral...");
     }
 
     public void createPrescription() {
-        System.out.println("Prescription created.");
+        System.out.println("Creating prescription...");
     }
 
     public void updateClinicalNotes() {
-        System.out.println("Clinical notes updated.");
+        System.out.println("Updating clinical notes...");
     }
 }
