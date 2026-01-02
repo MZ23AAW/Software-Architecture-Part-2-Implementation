@@ -52,4 +52,25 @@ public class Appointment {
     public String getPatientId() {
         return patientId;
     }
+
+    public String getAppointmentId() {
+        return appointmentId;
+    }
+
+    public Date getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public Time getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public String getAppointmentType() {
+        return appointmentType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }
+

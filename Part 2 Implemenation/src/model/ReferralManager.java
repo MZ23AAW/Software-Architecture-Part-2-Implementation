@@ -9,9 +9,10 @@ public class ReferralManager {
     private static ReferralManager instance;
 
     private final Queue<Referral> referralQueue = new LinkedList<>();
-    private final Set<Integer> processedReferralIds = new HashSet<>();
+    private final Set<String> processedReferralIds = new HashSet<>(); // ✅ FIXED
 
-    private ReferralManager() {}
+    private ReferralManager() {
+    }
 
     public static ReferralManager getInstance() {
         if (instance == null) {
@@ -29,7 +30,6 @@ public class ReferralManager {
         referralQueue.add(referral);
         processedReferralIds.add(referral.getReferralId());
 
-        // Simulate email + EHR update
         writeEmailToFile(referral);
         writeEhrUpdate(referral);
 
@@ -61,3 +61,4 @@ public class ReferralManager {
         }
     }
 }
+

@@ -3,25 +3,36 @@ package controller;
 import model.Referral;
 import model.ReferralManager;
 
-import java.util.Date;
-
 public class ReferralController {
 
-    public void createReferral(int referralId, int patientId,
-                               int referringClinicianId, int referredToClinicianId,
-                               int referringFacilityId, int referredToFacilityId,
-                               String urgencyLevel, String referralReason,
-                               String clinicalSummary, String requestedInvestigations,
-                               int appointmentId, String notes) {
+    public void createReferral(
+            String referralId,
+            String patientId,
+            String referringClinicianId,
+            String referredToClinicianId,
+            String referringFacilityId,
+            String referredToFacilityId,
+            String urgencyLevel,
+            String referralReason,
+            String clinicalSummary,
+            String requestedInvestigations,
+            String appointmentId,
+            String notes
+    ) {
 
         Referral referral = new Referral(
-                referralId, patientId,
-                referringClinicianId, referredToClinicianId,
-                referringFacilityId, referredToFacilityId,
-                new Date(), urgencyLevel, referralReason,
-                clinicalSummary, requestedInvestigations,
-                "Pending", appointmentId, notes,
-                new Date(), new Date()
+                referralId,
+                patientId,
+                referringClinicianId,
+                referredToClinicianId,
+                referringFacilityId,
+                referredToFacilityId,
+                urgencyLevel,
+                referralReason,
+                clinicalSummary,
+                requestedInvestigations,
+                appointmentId,
+                notes
         );
 
         ReferralManager.getInstance().processReferral(referral);

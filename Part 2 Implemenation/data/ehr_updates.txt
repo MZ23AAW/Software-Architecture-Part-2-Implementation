@@ -1,0 +1,18 @@
+EHR UPDATE:
+Referral ID: R1767370677500
+Patient ID: P001
+Status: SENT
+Timestamp: 2026-01-02
+
+EHR UPDATE:
+Referral ID: R1767370718815
+Patient ID: P005
+Status: SENT
+Timestamp: 2026-01-02
+
+EHR UPDATE:
+Referral ID: R1767370726008
+Patient ID: P005
+Status: SENT
+Timestamp: 2026-01-02
+

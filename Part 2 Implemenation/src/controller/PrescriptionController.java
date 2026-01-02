@@ -3,43 +3,36 @@ package controller;
 import model.Prescription;
 import util.CSVWriter;
 
-import java.util.Date;
-
 public class PrescriptionController {
 
-    public void createPrescription(int prescriptionId,
-                                   int patientId,
-                                   int clinicianId,
-                                   int appointmentId,
-                                   String medicationName,
-                                   String dosage,
-                                   String frequency,
-                                   int durationDays,
-                                   int quantity,
-                                   String instructions,
-                                   String pharmacyName) {
+    public void createPrescription(
+            String prescriptionId,
+            String patientId,
+            String clinicianId,
+            String appointmentId,
+            String medication,
+            String dosage,
+            String frequency,
+            int durationDays,
+            int quantity,
+            String instructions,
+            String pharmacy
+    ) {
 
         Prescription prescription = new Prescription(
                 prescriptionId,
                 patientId,
                 clinicianId,
                 appointmentId,
-                new Date(),
-                medicationName,
+                medication,
                 dosage,
                 frequency,
                 durationDays,
                 quantity,
                 instructions,
-                pharmacyName,
-                "Issued",
-                new Date(),
-                null
+                pharmacy
         );
 
-        CSVWriter.appendLine(
-                "data/prescriptions.csv",
-                prescription.toCSV()
-        );
+        CSVWriter.appendLine("data/prescriptions.csv", prescription.toCSV());
     }
 }
