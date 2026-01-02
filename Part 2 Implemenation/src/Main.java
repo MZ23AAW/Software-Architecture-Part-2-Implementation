@@ -1,24 +1,19 @@
-import controller.ReferralManager;
-import model.Referral;
+import controller.ReferralController;
 
 public class Main {
-
     public static void main(String[] args) {
 
-        ReferralManager rm = ReferralManager.getInstance();
-
-        Referral r = new Referral(
-                "R001",
-                "P001",
-                "C001",
-                "C010",
-                "Neurology referral",
-                "Patient reports persistent headaches",
-                "Pending"
+        ReferralController rc = new ReferralController();
+        rc.createReferral(
+                1, 1001,
+                200, 300,
+                10, 20,
+                "Urgent",
+                "Cardiology referral",
+                "Chest pain on exertion for 2 weeks.",
+                "ECG, Bloods",
+                5001,
+                "Patient anxious."
         );
-
-        rm.addReferral(r);
-
-        System.out.println("Referral created and recorded.");
     }
 }

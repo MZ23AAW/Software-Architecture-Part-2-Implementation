@@ -1,15 +1,15 @@
-package controller;
+package model;
 
-import model.Referral;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ReferralManager {
 
     private static ReferralManager instance;
-    private List<Referral> referralQueue = new ArrayList<>();
+
+    private final Queue<Referral> referralQueue = new LinkedList<>();
+    private final Set<Integer> processedReferralIds = new HashSet<>();
 
     private ReferralManager() {}
 
@@ -20,14 +20,42 @@ public class ReferralManager {
         return instance;
     }
 
-    public void addReferral(Referral referral) {
+    public void processReferral(Referral referral) {
+        if (processedReferralIds.contains(referral.getReferralId())) {
+            System.out.println("Duplicate referral ignored: " + referral.getReferralId());
+            return;
+        }
+
         referralQueue.add(referral);
-        writeReferralToFile(referral);
+        processedReferralIds.add(referral.getReferralId());
+
+        // Simulate email + EHR update
+        writeEmailToFile(referral);
+        writeEhrUpdate(referral);
+
+        System.out.println("Referral queued and processed: " + referral.getReferralId());
     }
 
-    private void writeReferralToFile(Referral referral) {
-        try (FileWriter writer = new FileWriter("data/referrals_outbox.txt", true)) {
-            writer.write(referral.toText());
+    public Referral nextReferral() {
+        return referralQueue.poll();
+    }
+
+    public int queueSize() {
+        return referralQueue.size();
+    }
+
+    private void writeEmailToFile(Referral referral) {
+        String fileName = "data/referral_email_" + referral.getReferralId() + ".txt";
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write(referral.sendReferralNotification());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeEhrUpdate(Referral referral) {
+        try (FileWriter writer = new FileWriter("data/ehr_updates.txt", true)) {
+            writer.write("EHR UPDATE:\n" + referral.toText());
         } catch (IOException e) {
             e.printStackTrace();
         }

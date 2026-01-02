@@ -1,33 +1,49 @@
 package model;
 
+import java.util.Date;
+
 public class Patient {
 
-    private String patientId;
+    private int patientId;
     private String firstName;
     private String lastName;
-    private String dateOfBirth;
+    private Date dateOfBirth;
     private String nhsNumber;
     private String gender;
-    private String phone;
+    private String phoneNumber;
     private String email;
+    private String address;
     private String postcode;
+    private String emergencyContactName;
+    private String emergencyContactPhone;
+    private Date registrationDate;
+    private int gpSurgeryId;
 
-    public Patient(String patientId, String firstName, String lastName,
-                   String dob, String nhsNumber, String gender,
-                   String phone, String email, String postcode) {
+    public Patient(int patientId, String firstName, String lastName,
+                   Date dateOfBirth, String nhsNumber, String gender,
+                   String phoneNumber, String email, String address,
+                   String postcode, String emergencyContactName,
+                   String emergencyContactPhone, Date registrationDate,
+                   int gpSurgeryId) {
 
         this.patientId = patientId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dob;
+        this.dateOfBirth = dateOfBirth;
         this.nhsNumber = nhsNumber;
         this.gender = gender;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.email = email;
+        this.address = address;
         this.postcode = postcode;
+        this.emergencyContactName = emergencyContactName;
+        this.emergencyContactPhone = emergencyContactPhone;
+        this.registrationDate = registrationDate;
+        this.gpSurgeryId = gpSurgeryId;
     }
 
-    public String getPatientId() {
+
+    public int getPatientId() {
         return patientId;
     }
 
@@ -39,7 +55,25 @@ public class Patient {
         return lastName;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+
+
+    public void registerPatient() {
+        System.out.println("Patient registered.");
+    }
+
+    public void updateProfile() {
+        System.out.println("Patient profile updated.");
+    }
+
+    public void viewAppointments() {
+        System.out.println("Viewing appointments...");
+    }
+
+    public void viewPrescriptions() {
+        System.out.println("Viewing prescriptions...");
+    }
+
+    public void viewReferrals() {
+        System.out.println("Viewing referrals...");
     }
 }

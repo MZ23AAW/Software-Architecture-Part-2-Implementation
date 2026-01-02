@@ -1,24 +1,27 @@
 package model;
 
+import java.util.Date;
+
 public class Staff {
 
-    private String staffId;
+    private int staffId;
     private String firstName;
     private String lastName;
     private String role;
     private String department;
-    private String facilityId;
+    private int facilityId;
     private String phoneNumber;
     private String email;
     private String employmentStatus;
-    private String startDate;
+    private Date startDate;
     private String lineManager;
     private String accessLevel;
 
-    public Staff(String staffId, String firstName, String lastName,
-                 String role, String department, String facilityId,
-                 String phoneNumber, String email, String employmentStatus,
-                 String startDate, String lineManager, String accessLevel) {
+    public Staff(int staffId, String firstName, String lastName,
+                 String role, String department, int facilityId,
+                 String phoneNumber, String email,
+                 String employmentStatus, Date startDate,
+                 String lineManager, String accessLevel) {
 
         this.staffId = staffId;
         this.firstName = firstName;
@@ -34,8 +37,45 @@ public class Staff {
         this.accessLevel = accessLevel;
     }
 
-    public String getStaffId() { return staffId; }
-    public String getRole() { return role; }
-    public String getFacilityId() { return facilityId; }
-    public String getAccessLevel() { return accessLevel; }
+
+    public int getStaffId() {
+        return staffId;
+    }
+
+    public int getFacilityId() {
+        return facilityId;
+    }
+
+    public String getrole() {
+        return role;
+    }
+
+    public String getaccessLevel() {
+        return accessLevel;
+    }
+
+
+    public void createStaffAccount() {
+        System.out.println("Staff account created.");
+    }
+
+    public void updateStaffDetails() {
+        System.out.println("Staff details updated.");
+    }
+
+    public void assignToFacility() {
+        System.out.println("Staff assigned to facility.");
+    }
+
+    public void viewAssignedFacility() {
+        System.out.println("Viewing assigned facility.");
+    }
+
+    public void manageAppointments() {
+        System.out.println("Managing appointments...");
+    }
+
+    public void registerPatient() {
+        System.out.println("Registering patient...");
+    }
 }

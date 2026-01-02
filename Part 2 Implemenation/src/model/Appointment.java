@@ -1,26 +1,37 @@
 package model;
 
+import java.util.Date;
+import java.sql.Time;
+
 public class Appointment {
 
-    private String appointmentId;
-    private String patientId;
-    private String clinicianId;
-    private String facilityId;
-    private String appointmentDate;
-    private String appointmentTime;
+    private int appointmentId;
+    private int patientId;
+    private int clinicianId;
+    private int facilityId;
+    private Date appointmentDate;
+    private Time appointmentTime;
     private int durationMinutes;
     private String appointmentType;
     private String status;
     private String reasonForVisit;
     private String notes;
-    private String createdDate;
-    private String lastModified;
+    private Date createdDate;
+    private Date lastModified;
 
-    public Appointment(String appointmentId, String patientId, String clinicianId,
-                       String facilityId, String appointmentDate, String appointmentTime,
-                       int durationMinutes, String appointmentType, String status,
-                       String reasonForVisit, String notes,
-                       String createdDate, String lastModified) {
+    public Appointment(int appointmentId,
+                       int patientId,
+                       int clinicianId,
+                       int facilityId,
+                       Date appointmentDate,
+                       Time appointmentTime,
+                       int durationMinutes,
+                       String appointmentType,
+                       String status,
+                       String reasonForVisit,
+                       String notes,
+                       Date createdDate,
+                       Date lastModified) {
 
         this.appointmentId = appointmentId;
         this.patientId = patientId;
@@ -37,7 +48,42 @@ public class Appointment {
         this.lastModified = lastModified;
     }
 
-    public String getAppointmentId() { return appointmentId; }
-    public String getPatientId() { return patientId; }
-    public String getStatus() { return status; }
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public int getPatientId() {
+        return patientId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+
+    public void createAppointment() {
+        System.out.println("Appointment created.");
+    }
+
+    public void modifyAppointment() {
+        System.out.println("Appointment modified.");
+        this.lastModified = new Date();
+    }
+
+    public void cancelAppointment() {
+        this.status = "Cancelled";
+        this.lastModified = new Date();
+        System.out.println("Appointment cancelled.");
+    }
+
+    public void viewAppointmentDetails() {
+        System.out.println("Viewing appointment details...");
+    }
+
+    public void updateStatus(String newStatus) {
+        this.status = newStatus;
+        this.lastModified = new Date();
+        System.out.println("Appointment status updated.");
+    }
 }
