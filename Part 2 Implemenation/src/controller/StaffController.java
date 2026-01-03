@@ -21,16 +21,16 @@ public class StaffController {
             }
 
             Staff staff = new Staff(
-                    row[0],                 // staff_id e.g. S001
+                    row[0],
                     row[1],
                     row[2],
                     row[3],
                     row[4],
-                    row[5],                 // facility_id e.g. F001
+                    row[5],
                     row[6],
                     row[7],
                     row[8],
-                    DateParser.parse(row[9]), // start_date
+                    DateParser.parse(row[9]),
                     row[10],
                     row[11]
             );

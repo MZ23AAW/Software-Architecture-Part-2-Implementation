@@ -55,8 +55,8 @@ public class Prescription {
                 row[5],
                 row[6],
                 row[7],
-                parseIntLoose(row[8]),  // ✅ durationDays safe
-                parseIntLoose(row[9]),  // ✅ quantity safe
+                parseIntLoose(row[8]),
+                parseIntLoose(row[9]),
                 row[10],
                 row.length > 11 ? row[11] : ""
         );

@@ -17,12 +17,6 @@ public class MainFrame extends JFrame {
     private final PrescriptionController prescriptionController = new PrescriptionController();
     private final ReferralController referralController = new ReferralController();
     private final ClinicianController clinicianController = new ClinicianController();
-    private final DefaultTableModel clinicianTableModel =
-
-            new DefaultTableModel(
-                    new String[]{"Clinician ID", "Name", "Title", "Speciality", "Workplace", "Type", "Status"}, 0
-            );
-
 
     private final DefaultListModel<String> patientListModel = new DefaultListModel<>();
     private final JList<String> patientList = new JList<>(patientListModel);
@@ -37,8 +31,12 @@ public class MainFrame extends JFrame {
     );
     private final JTable rxTable = new JTable(rxTableModel);
 
-    private final JTextArea logArea = new JTextArea();
+    private final DefaultTableModel clinicianTableModel = new DefaultTableModel(
+            new String[]{"Clinician ID", "Name", "Title", "Speciality", "Workplace", "Type", "Status"}, 0
+    );
+    private final JTable clinicianTable = new JTable(clinicianTableModel);
 
+    private final JTextArea logArea = new JTextArea();
     private JTabbedPane tabs;
 
     public MainFrame() {
@@ -55,6 +53,7 @@ public class MainFrame extends JFrame {
         loadAllData();
         wireEvents();
     }
+
 
     private JPanel buildLeftPanel() {
         JPanel panel = new JPanel(new BorderLayout(8, 8));
@@ -84,18 +83,11 @@ public class MainFrame extends JFrame {
         return panel;
     }
 
-
     private JTabbedPane buildTabs() {
         tabs = new JTabbedPane();
-
-        JPanel appointmentsPanel = buildAppointmentsPanel();
-        JPanel prescriptionsPanel = buildPrescriptionsPanel();
-        JPanel clinciansPanel = buildAppointmentsPanel();
-
-        tabs.addTab("Appointments", appointmentsPanel);
-        tabs.addTab("Prescriptions", prescriptionsPanel);
+        tabs.addTab("Appointments", buildAppointmentsPanel());
+        tabs.addTab("Prescriptions", buildPrescriptionsPanel());
         tabs.addTab("Clinicians", buildCliniciansPanel());
-
         return tabs;
     }
 
@@ -119,10 +111,8 @@ public class MainFrame extends JFrame {
         panel.putClientProperty("referBtn", referBtn);
 
         panel.add(buttonRow, BorderLayout.SOUTH);
-
         return panel;
     }
-
 
     private JPanel buildPrescriptionsPanel() {
         JPanel panel = new JPanel(new BorderLayout(8, 8));
@@ -147,7 +137,17 @@ public class MainFrame extends JFrame {
         return panel;
     }
 
+    private JPanel buildCliniciansPanel() {
+        JPanel panel = new JPanel(new BorderLayout(8, 8));
 
+        JLabel label = new JLabel("Clinicians");
+        label.setFont(label.getFont().deriveFont(Font.BOLD, 14f));
+
+        panel.add(label, BorderLayout.NORTH);
+        panel.add(new JScrollPane(clinicianTable), BorderLayout.CENTER);
+
+        return panel;
+    }
 
     private JPanel buildBottomPanel() {
         JPanel panel = new JPanel(new BorderLayout(8, 8));
@@ -157,6 +157,7 @@ public class MainFrame extends JFrame {
         return panel;
     }
 
+
     private void loadAllData() {
         try {
             patientController.loadPatients("data/patients.csv");
@@ -164,16 +165,18 @@ public class MainFrame extends JFrame {
             facilityController.loadFacilities("data/facilities.csv");
             staffController.loadStaff("data/staff.csv");
 
-            // ✅ NEW
             prescriptionController.loadPrescriptions("data/prescriptions.csv");
+            clinicianController.loadClinicians("data/clinicians.csv");
 
             refreshPatientList();
+            refreshCliniciansTable();
 
             log("Loaded: " + patientController.getPatients().size() + " patients");
             log("Loaded: " + appointmentController.getAppointments().size() + " appointments");
             log("Loaded: " + facilityController.getFacilities().size() + " facilities");
             log("Loaded: " + staffController.getAllStaff().size() + " staff");
             log("Loaded: " + prescriptionController.getPrescriptions().size() + " prescriptions");
+            log("Loaded: " + clinicianController.getClinicians().size() + " clinicians");
 
         } catch (Exception e) {
             log("ERROR loading data: " + e.getMessage());
@@ -208,7 +211,6 @@ public class MainFrame extends JFrame {
 
         prescribeBtn.addActionListener(e -> {
             createPrescriptionForSelectedPatient();
-
             prescriptionController.loadPrescriptions("data/prescriptions.csv");
             String pid = patientList.getSelectedValue();
             if (pid != null) refreshPrescriptions(pid);
@@ -227,47 +229,8 @@ public class MainFrame extends JFrame {
             if (pid != null) refreshPrescriptions(pid);
         });
 
-
-        deleteRxBtn.addActionListener(e -> deleteSelectedPrescription()); }
-
-    private void deleteSelectedPrescription() {
-        int row = rxTable.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Select a prescription row first.");
-            return;
-        }
-
-        String rxId = String.valueOf(rxTableModel.getValueAt(row, 0));
-
-        int confirm = JOptionPane.showConfirmDialog(
-                this,
-                "Delete prescription " + rxId + "?",
-                "Confirm Delete",
-                JOptionPane.YES_NO_OPTION
-        );
-        if (confirm != JOptionPane.YES_OPTION) return;
-
-        boolean ok = prescriptionController.deletePrescription("data/prescriptions.csv", rxId);
-        if (!ok) {
-            JOptionPane.showMessageDialog(this, "Delete failed (not found).");
-            return;
-        }
-
-        prescriptionController.loadPrescriptions("data/prescriptions.csv");
-        String pid = patientList.getSelectedValue();
-        if (pid != null) refreshPrescriptions(pid);
-
-        log("Prescription deleted: " + rxId);
+        deleteRxBtn.addActionListener(e -> deleteSelectedPrescription());
     }
-
-    private final ClinicianController ClinicianController = new ClinicianController();
-
-    private final DefaultTableModel ClinicianTableModel = new DefaultTableModel(
-            new String[]{"Clinician ID", "Name", "Title", "Speciality", "Workplace", "Type", "Status"}, 0
-    );
-    private final JTable clinicianTable = new JTable(ClinicianTableModel);
-
-
 
 
     private void refreshPatientList() {
@@ -279,7 +242,6 @@ public class MainFrame extends JFrame {
             patientList.setSelectedIndex(0);
         }
     }
-
 
     private void refreshAppointments(String patientId) {
         apptTableModel.setRowCount(0);
@@ -316,6 +278,22 @@ public class MainFrame extends JFrame {
             });
         }
         log("Prescriptions for " + patientId + ": " + list.size());
+    }
+
+    private void refreshCliniciansTable() {
+        clinicianTableModel.setRowCount(0);
+
+        for (Clinician c : clinicianController.getClinicians()) {
+            clinicianTableModel.addRow(new Object[]{
+                    c.getClinicianId(),
+                    c.getFirstName() + " " + c.getLastName(),
+                    c.getTitle(),
+                    c.getSpeciality(),
+                    c.getWorkplaceId(),
+                    c.getWorkplaceType(),
+                    c.getEmploymentStatus()
+            });
+        }
     }
 
 
@@ -364,18 +342,12 @@ public class MainFrame extends JFrame {
             if (gpId == null) return;
 
             Patient newP = new Patient(
-                    id.trim(),
-                    fn.trim(),
-                    ln.trim(),
+                    id.trim(), fn.trim(), ln.trim(),
                     util.DateParser.parse(dob),
-                    nhs.trim(),
-                    gender.trim(),
-                    phone.trim(),
-                    email.trim(),
-                    address.trim(),
-                    postcode.trim(),
-                    ecName.trim(),
-                    ecPhone.trim(),
+                    nhs.trim(), gender.trim(),
+                    phone.trim(), email.trim(),
+                    address.trim(), postcode.trim(),
+                    ecName.trim(), ecPhone.trim(),
                     util.DateParser.parse(regDate),
                     gpId.trim()
             );
@@ -393,36 +365,6 @@ public class MainFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Error adding patient: " + ex.getMessage());
         }
     }
-
-    private JPanel buildCliniciansPanel() {
-        JPanel panel = new JPanel(new BorderLayout(8, 8));
-
-        JLabel label = new JLabel("Clinicians");
-        label.setFont(label.getFont().deriveFont(Font.BOLD, 14f));
-
-        panel.add(label, BorderLayout.NORTH);
-        panel.add(new JScrollPane(clinicianTable), BorderLayout.CENTER);
-
-        return panel;
-    }
-
-    private void refreshCliniciansTable() {
-
-        clinicianTableModel.setRowCount(0);
-
-        for (Clinician c : clinicianController.getClinicians()) {
-            clinicianTableModel.addRow(new Object[]{
-                    c.getClinicianId(),
-                    c.getFirstName() + " " + c.getLastName(),
-                    c.getTitle(),
-                    c.getSpeciality(),
-                    c.getWorkplaceId(),
-                    c.getWorkplaceType(),
-                    c.getEmploymentStatus()
-            });
-        }
-    }
-
 
     private void editPatientDialog() {
         String selectedId = patientList.getSelectedValue();
@@ -501,6 +443,37 @@ public class MainFrame extends JFrame {
 
         refreshPatientList();
         log("Patient deleted: " + selectedId);
+    }
+
+
+    private void deleteSelectedPrescription() {
+        int row = rxTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Select a prescription row first.");
+            return;
+        }
+
+        String rxId = String.valueOf(rxTableModel.getValueAt(row, 0));
+
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Delete prescription " + rxId + "?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (confirm != JOptionPane.YES_OPTION) return;
+
+        boolean ok = prescriptionController.deletePrescription("data/prescriptions.csv", rxId);
+        if (!ok) {
+            JOptionPane.showMessageDialog(this, "Delete failed (not found).");
+            return;
+        }
+
+        prescriptionController.loadPrescriptions("data/prescriptions.csv");
+        String pid = patientList.getSelectedValue();
+        if (pid != null) refreshPrescriptions(pid);
+
+        log("Prescription deleted: " + rxId);
     }
 
     private void createPrescriptionForSelectedPatient() {
@@ -605,6 +578,7 @@ public class MainFrame extends JFrame {
             log("ERROR creating referral: " + ex.getMessage());
         }
     }
+
 
     private void log(String msg) {
         logArea.append(msg + "\n");

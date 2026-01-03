@@ -16,3 +16,9 @@ Patient ID: P005
 Status: SENT
 Timestamp: 2026-01-02
 
+EHR UPDATE:
+Referral ID: R1767397936493
+Patient ID: P001
+Status: SENT
+Timestamp: 2026-01-02
+

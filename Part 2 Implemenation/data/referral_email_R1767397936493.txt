@@ -1,0 +1,13 @@
+REFERRAL NOTIFICATION
+Referral ID: R1767397936493
+Patient ID: P001
+From Clinician: C001
+To Clinician: C010
+From Facility: F001
+To Facility: F010
+Urgency: Urgent
+Reason: Specialist review
+Summary: Symptoms described...
+Investigations: Bloods
+Appointment ID: A001
+Notes: N/A

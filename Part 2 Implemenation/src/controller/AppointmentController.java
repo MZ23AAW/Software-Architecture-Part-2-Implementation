@@ -22,19 +22,19 @@ public class AppointmentController {
             }
 
             Appointment appointment = new Appointment(
-                    row[0],                    // appointment_id e.g. A001
-                    row[1],                    // patient_id e.g. P001
-                    row[2],                    // clinician_id e.g. C001
-                    row[3],                    // facility_id e.g. F001
-                    DateParser.parse(row[4]),  // appointment_date
-                    Time.valueOf(normaliseTime(row[5])), // appointment_time
-                    Integer.parseInt(row[6].trim()),     // duration_minutes
-                    row[7],                    // appointment_type
-                    row[8],                    // status
-                    row[9],                    // reason_for_visit
-                    row[10],                   // notes
-                    DateParser.parse(row[11]),  // created_date
-                    DateParser.parse(row[12])   // last_modified
+                    row[0],
+                    row[1],
+                    row[2],
+                    row[3],
+                    DateParser.parse(row[4]),
+                    Time.valueOf(normaliseTime(row[5])),
+                    Integer.parseInt(row[6].trim()),
+                    row[7],
+                    row[8],
+                    row[9],
+                    row[10],
+                    DateParser.parse(row[11]),
+                    DateParser.parse(row[12])
             );
 
             appointments.add(appointment);
@@ -54,6 +54,7 @@ public class AppointmentController {
         }
         return result;
     }
+
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
     }
@@ -62,31 +63,9 @@ public class AppointmentController {
         appointments.removeIf(a -> a.getAppointmentId().equals(appointmentId));
     }
 
-
     private String normaliseTime(String raw) {
         raw = raw.trim();
         if (raw.matches("^\\d{2}:\\d{2}$")) return raw + ":00";
         return raw;
     }
 }
-
-public String getAppointmentId() {
-    return appointmentId;
-}
-
-public Date getAppointmentDate() {
-    return appointmentDate;
-}
-
-public Time getAppointmentTime() {
-    return appointmentTime;
-}
-
-public String getAppointmentType() {
-    return appointmentType;
-}
-
-public String getStatus() {
-    return status;
-}
-
