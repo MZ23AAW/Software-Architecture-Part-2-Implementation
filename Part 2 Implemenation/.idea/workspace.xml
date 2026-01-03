@@ -7,11 +7,7 @@
     <list default="true" id="451ce19a-230a-49cb-8ef5-b662fdce1408" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/ehr_updates.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/ehr_updates.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/prescriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/prescriptions.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ClinicianController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClinicianController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/StaffController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/StaffController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Prescription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Prescription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

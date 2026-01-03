@@ -49,28 +49,40 @@ public class Appointment {
         this.lastModified = lastModified;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getAppointmentId() { return appointmentId; }
+    public String getPatientId() { return patientId; }
+    public String getClinicianId() { return clinicianId; }
+    public String getFacilityId() { return facilityId; }
+
+    public Date getAppointmentDate() { return appointmentDate; }
+    public Time getAppointmentTime() { return appointmentTime; }
+    public int getDurationMinutes() { return durationMinutes; }
+
+    public String getAppointmentType() { return appointmentType; }
+    public String getStatus() { return status; }
+    public String getReasonForVisit() { return reasonForVisit; }
+    public String getNotes() { return notes; }
+
+    public Date getCreatedDate() { return createdDate; }
+    public Date getLastModified() { return lastModified; }
+
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-    public String getAppointmentId() {
-        return appointmentId;
+    public void setAppointmentTime(Time appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
 
-    public Date getAppointmentDate() {
-        return appointmentDate;
+    public void setAppointmentType(String appointmentType) {
+        this.appointmentType = appointmentType;
     }
 
-    public Time getAppointmentTime() {
-        return appointmentTime;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getAppointmentType() {
-        return appointmentType;
-    }
-
-    public String getStatus() {
-        return status;
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 }
-

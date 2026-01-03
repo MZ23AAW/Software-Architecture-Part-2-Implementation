@@ -101,16 +101,30 @@ public class MainFrame extends JFrame {
         panel.add(new JScrollPane(apptTable), BorderLayout.CENTER);
 
         JPanel buttonRow = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JButton addApptBtn = new JButton("Add Appointment");
+        JButton editApptBtn = new JButton("Edit Appointment");
+        JButton deleteApptBtn = new JButton("Delete Appointment");
+
         JButton prescribeBtn = new JButton("Create Prescription");
         JButton referBtn = new JButton("Create Referral");
 
+        buttonRow.add(addApptBtn);
+        buttonRow.add(editApptBtn);
+        buttonRow.add(deleteApptBtn);
+
         buttonRow.add(prescribeBtn);
         buttonRow.add(referBtn);
+
+        panel.putClientProperty("addApptBtn", addApptBtn);
+        panel.putClientProperty("editApptBtn", editApptBtn);
+        panel.putClientProperty("deleteApptBtn", deleteApptBtn);
 
         panel.putClientProperty("prescribeBtn", prescribeBtn);
         panel.putClientProperty("referBtn", referBtn);
 
         panel.add(buttonRow, BorderLayout.SOUTH);
+
         return panel;
     }
 
@@ -215,6 +229,15 @@ public class MainFrame extends JFrame {
             String pid = patientList.getSelectedValue();
             if (pid != null) refreshPrescriptions(pid);
         });
+
+        JButton addApptBtn = (JButton) appointmentsPanel.getClientProperty("addApptBtn");
+        JButton editApptBtn = (JButton) appointmentsPanel.getClientProperty("editApptBtn");
+        JButton deleteApptBtn = (JButton) appointmentsPanel.getClientProperty("deleteApptBtn");
+
+        addApptBtn.addActionListener(e -> addAppointmentDialog());
+        editApptBtn.addActionListener(e -> editSelectedAppointment());
+        deleteApptBtn.addActionListener(e -> deleteSelectedAppointment());
+
 
         referBtn.addActionListener(e -> createReferralForSelectedPatient());
 
@@ -453,6 +476,8 @@ public class MainFrame extends JFrame {
             return;
         }
 
+
+
         String rxId = String.valueOf(rxTableModel.getValueAt(row, 0));
 
         int confirm = JOptionPane.showConfirmDialog(
@@ -475,6 +500,163 @@ public class MainFrame extends JFrame {
 
         log("Prescription deleted: " + rxId);
     }
+
+    private void addAppointmentDialog() {
+        String patientId = patientList.getSelectedValue();
+        if (patientId == null) {
+            JOptionPane.showMessageDialog(this, "Select a patient first.");
+            return;
+        }
+
+        String appointmentId = "A" + System.currentTimeMillis();
+
+        String clinicianId = JOptionPane.showInputDialog(this, "Clinician ID (e.g. C001):", "C001");
+        if (clinicianId == null) return;
+
+        String facilityId = JOptionPane.showInputDialog(this, "Facility ID (e.g. F001):", "F001");
+        if (facilityId == null) return;
+
+        String dateStr = JOptionPane.showInputDialog(this, "Appointment Date (yyyy-mm-dd):", "2025-01-10");
+        if (dateStr == null) return;
+
+        String timeStr = JOptionPane.showInputDialog(this, "Appointment Time (HH:mm or HH:mm:ss):", "09:00");
+        if (timeStr == null) return;
+
+        String durationStr = JOptionPane.showInputDialog(this, "Duration minutes:", "30");
+        if (durationStr == null) return;
+
+        String type = JOptionPane.showInputDialog(this, "Appointment Type:", "Check-up");
+        if (type == null) return;
+
+        String status = JOptionPane.showInputDialog(this, "Status:", "Booked");
+        if (status == null) return;
+
+        String reason = JOptionPane.showInputDialog(this, "Reason for visit:", "N/A");
+        if (reason == null) return;
+
+        String notes = JOptionPane.showInputDialog(this, "Notes:", "");
+        if (notes == null) return;
+
+        try {
+            java.sql.Date apptDate = util.DateParser.parse(dateStr);
+            java.sql.Time apptTime = java.sql.Time.valueOf(normaliseTime(timeStr));
+            int duration = Integer.parseInt(durationStr.trim());
+
+            java.sql.Date now = new java.sql.Date(System.currentTimeMillis());
+
+            Appointment a = new Appointment(
+                    appointmentId,
+                    patientId,
+                    clinicianId.trim(),
+                    facilityId.trim(),
+                    apptDate,
+                    apptTime,
+                    duration,
+                    type.trim(),
+                    status.trim(),
+                    reason.trim(),
+                    notes.trim(),
+                    now,
+                    now
+            );
+
+            appointmentController.addAppointment(a);
+            refreshAppointments(patientId);
+            log("Appointment added: " + appointmentId);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error adding appointment: " + ex.getMessage());
+        }
+    }
+
+    private void deleteSelectedAppointment() {
+        String patientId = patientList.getSelectedValue();
+        if (patientId == null) return;
+
+        int row = apptTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Select an appointment row first.");
+            return;
+        }
+
+        String appointmentId = String.valueOf(apptTableModel.getValueAt(row, 0));
+
+        int confirm = JOptionPane.showConfirmDialog(
+                this,
+                "Delete appointment " + appointmentId + "?",
+                "Confirm Delete",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (confirm != JOptionPane.YES_OPTION) return;
+
+        appointmentController.deleteAppointment(appointmentId);
+        refreshAppointments(patientId);
+        log("Appointment deleted: " + appointmentId);
+    }
+
+    private void editSelectedAppointment() {
+        String patientId = patientList.getSelectedValue();
+        if (patientId == null) {
+            JOptionPane.showMessageDialog(this, "Select a patient first.");
+            return;
+        }
+
+        int row = apptTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Select an appointment row first.");
+            return;
+        }
+
+        String appointmentId = String.valueOf(apptTableModel.getValueAt(row, 0));
+
+        Appointment target = null;
+        for (Appointment a : appointmentController.getAppointments()) {
+            if (a.getAppointmentId().equals(appointmentId)) {
+                target = a;
+                break;
+            }
+        }
+
+        if (target == null) {
+            JOptionPane.showMessageDialog(this, "Appointment not found.");
+            return;
+        }
+
+        String dateStr = JOptionPane.showInputDialog(
+                this,
+                "Appointment Date (yyyy-mm-dd):",
+                target.getAppointmentDate().toString()
+        );
+        if (dateStr == null) return;
+
+        String timeStr = JOptionPane.showInputDialog(
+                this,
+                "Appointment Time (HH:mm or HH:mm:ss):",
+                target.getAppointmentTime().toString()
+        );
+        if (timeStr == null) return;
+
+        String type = JOptionPane.showInputDialog(this, "Appointment Type:", target.getAppointmentType());
+        if (type == null) return;
+
+        String status = JOptionPane.showInputDialog(this, "Status:", target.getStatus());
+        if (status == null) return;
+
+        try {
+            target.setAppointmentDate(util.DateParser.parse(dateStr));
+            target.setAppointmentTime(java.sql.Time.valueOf(normaliseTime(timeStr)));
+            target.setAppointmentType(type.trim());
+            target.setStatus(status.trim());
+            target.setLastModified(new java.sql.Date(System.currentTimeMillis()));
+
+            refreshAppointments(patientId);
+            log("Appointment updated: " + appointmentId);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error editing appointment: " + ex.getMessage());
+        }
+    }
+
 
     private void createPrescriptionForSelectedPatient() {
         String patientId = patientList.getSelectedValue();
@@ -578,6 +760,15 @@ public class MainFrame extends JFrame {
             log("ERROR creating referral: " + ex.getMessage());
         }
     }
+
+    private String normaliseTime(String raw) {
+        raw = raw.trim();
+        if (raw.matches("^\\d{2}:\\d{2}$")) {
+            return raw + ":00";
+        }
+        return raw;
+    }
+
 
 
     private void log(String msg) {
