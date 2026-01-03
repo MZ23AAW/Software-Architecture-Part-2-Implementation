@@ -106,21 +106,18 @@ public class MainFrame extends JFrame {
         JButton editApptBtn = new JButton("Edit Appointment");
         JButton deleteApptBtn = new JButton("Delete Appointment");
 
-        JButton prescribeBtn = new JButton("Create Prescription");
         JButton referBtn = new JButton("Create Referral");
 
         buttonRow.add(addApptBtn);
         buttonRow.add(editApptBtn);
         buttonRow.add(deleteApptBtn);
 
-        buttonRow.add(prescribeBtn);
         buttonRow.add(referBtn);
 
         panel.putClientProperty("addApptBtn", addApptBtn);
         panel.putClientProperty("editApptBtn", editApptBtn);
         panel.putClientProperty("deleteApptBtn", deleteApptBtn);
 
-        panel.putClientProperty("prescribeBtn", prescribeBtn);
         panel.putClientProperty("referBtn", referBtn);
 
         panel.add(buttonRow, BorderLayout.SOUTH);
@@ -220,15 +217,8 @@ public class MainFrame extends JFrame {
         deletePatientBtn.addActionListener(e -> deletePatientAction());
 
         JPanel appointmentsPanel = (JPanel) tabs.getComponentAt(0);
-        JButton prescribeBtn = (JButton) appointmentsPanel.getClientProperty("prescribeBtn");
         JButton referBtn = (JButton) appointmentsPanel.getClientProperty("referBtn");
 
-        prescribeBtn.addActionListener(e -> {
-            createPrescriptionForSelectedPatient();
-            prescriptionController.loadPrescriptions("data/prescriptions.csv");
-            String pid = patientList.getSelectedValue();
-            if (pid != null) refreshPrescriptions(pid);
-        });
 
         JButton addApptBtn = (JButton) appointmentsPanel.getClientProperty("addApptBtn");
         JButton editApptBtn = (JButton) appointmentsPanel.getClientProperty("editApptBtn");

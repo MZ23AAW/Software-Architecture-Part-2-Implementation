@@ -44,6 +44,9 @@ public class Clinician {
         this.startDate = startDate;
     }
 
+    public Clinician(String clinicianId, String firstName, String lastName, String nurse, String generalNursing, String workplaceId, String workplaceType, String employmentStatus, Date startDate) {
+    }
+
 
     public String getClinicianId() {
         return clinicianId;

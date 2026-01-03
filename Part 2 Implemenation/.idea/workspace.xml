@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451ce19a-230a-49cb-8ef5-b662fdce1408" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/model/GeneralPractitioner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/Nurse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/SpecialistDoctor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ehr_updates.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/ehr_updates.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Clinician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Clinician.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
